@@ -46,6 +46,9 @@ plugins:
           section: "Performance Improvements"
           hidden: false
 
+  - - "@semantic-release/npm"
+    - pkgRoot: "Assets/Mirror"
+
   # Write the new version in version.txt
   - - '@semantic-release/exec'
     - prepareCmd: "echo ${nextRelease.version} > Assets/Mirror/version.txt"

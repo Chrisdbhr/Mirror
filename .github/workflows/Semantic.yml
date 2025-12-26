@@ -58,3 +58,18 @@ jobs:
           # UNITYPACK_DEPENDENCY3: "com.unity.dedicated-server 1.0.0"
           # package names separated by space (only one for now)
           UNITYPACK_TESTABLES: "com.unity.test-framework.performance"
+
+      - name: Split UPM Branch
+        if: success() 
+        shell: bash
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          git fetch origin master
+          git checkout master
+          git pull origin master
+          
+          git subtree split --prefix=Assets/Mirror -b upm
+          
+          git push -f origin upm:upm
