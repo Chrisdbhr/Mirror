@@ -1,11 +1,27 @@
 {
   "name": "com.mirrorng.mirror",
-  "displayName": "Mirror Networking",
+  "displayName": "Mirror Networking - ChrisJogos UPM Fork",
   "version": "96.9.2",
   "unity": "2021.3",
-  "description": "#1 Open Source Unity Networking Library",
+  "description": "#1 Open Source Unity Networking Library. Optimized for UPM installation.",
+  "keywords": [
+    "networking",
+    "multiplayer",
+    "mirror"
+  ],
+  "author": {
+    "name": "Mirror Networking - ChrisJogos UPM Fork",
+    "url": "https://mirror-networking.com/"
+  },
+  "samples": [
+    {
+      "displayName": "Mirror Examples",
+      "description": "Pong, Tanks, and other networking examples.",
+      "path": "Mirror/Examples"
+    }
+  ],
   "dependencies": {
-    "com.unity.ugui" : "2.0.0",
-    "com.unity.nuget.newtonsoft-json" : "3.0.2"
+    "com.unity.ugui": "2.0.0",
+    "com.unity.nuget.newtonsoft-json": "3.0.2"
   }
 }
