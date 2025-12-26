@@ -1,0 +1,8 @@
+{
+  "name": "com.mirrorng.mirror",
+  "displayName": "Mirror Networking",
+  "version": "96.9.2",
+  "unity": "2021.3",
+  "description": "#1 Open Source Unity Networking Library",
+  "dependencies": {}
+}
