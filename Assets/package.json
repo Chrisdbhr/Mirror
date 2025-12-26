@@ -4,5 +4,8 @@
   "version": "96.9.2",
   "unity": "2021.3",
   "description": "#1 Open Source Unity Networking Library",
-  "dependencies": {}
+  "dependencies": {
+    "com.unity.ugui" : "2.0.0",
+    "com.unity.nuget.newtonsoft-json" : "3.0.2"
+  }
 }

@@ -7,7 +7,7 @@ on:
 jobs:
   SemanticRelease:
     name: Semantic Release
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     permissions:
       contents: write # to be able to publish a GitHub release
 
@@ -17,15 +17,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      # - name: Setup .NET
-      #   uses: actions/setup-dotnet@v4
-      #   with:
-      #     dotnet-version: '8.0.x'
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
   
       - name: Install dotnet-script
         run: |
           dotnet tool install -g dotnet-script
           dotnet script --version
+          echo "$HOME/.dotnet/tools" >> $GITHUB_PATH
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -42,8 +43,7 @@ jobs:
         run: npm i -D @semantic-release/exec --legacy-peer-deps
 
       - name: Release
-        run: npx semantic-release
-          --debug
+        run: npx semantic-release --debug
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           UNITYPACK_OUTPUT: "Mirror.unitypackage"
