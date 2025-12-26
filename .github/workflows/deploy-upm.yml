@@ -1,0 +1,45 @@
+name: Deploy UPM Branch
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+jobs:
+  split-upm:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required for git subtree and tags history
+
+      - name: Sync Version and Split
+        shell: bash
+        run: |
+          # Detect version from root package.json or git tags
+          VERSION=$(node -p "require('./package.json').version" 2>/dev/null || git describe --tags --abbrev=0)
+          echo "Detected version: $VERSION"
+
+          # Update the internal package.json version to match the repo version
+          # This ensures UPM displays the correct version in Unity's Package Manager
+          if [ -f Assets/package.json ]; then
+            sed -i "s/\"version\": \".*\"/\"version\": \"$VERSION\"/" Assets/package.json
+          fi
+
+          # Git configuration for the automation commit
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # Temporary commit to ensure the version change is included in the split
+          git add Assets/package.json
+          git commit -m "chore: update Assets package version to $VERSION" || echo "No changes to commit"
+
+          # Use subtree to isolate the Assets folder into the 'upm' branch
+          # This creates a branch where the content of Assets/ is the root
+          git subtree split --prefix=Assets -b upm
+          
+          # Force push the 'upm' branch to the origin repository
+          git push -f origin upm:upm
