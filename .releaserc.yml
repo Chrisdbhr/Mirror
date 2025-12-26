@@ -47,7 +47,7 @@ plugins:
           hidden: false
 
   - - "@semantic-release/npm"
-    - pkgRoot: "Assets/Mirror"
+    - pkgRoot: "Assets"
 
   # Write the new version in version.txt
   - - '@semantic-release/exec'
