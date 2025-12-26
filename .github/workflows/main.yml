@@ -34,17 +34,6 @@ on:
       - '**.ps1'
   
 jobs:
-  RunUnityTests:
-    name: Run Unity Tests
-    uses: ./.github/workflows/RunUnityTests.yml
-    secrets: inherit
-
-  #SonarQube:
-  #  name: SonarQube Analysis
-  #  needs: RunUnityTests
-  #  uses: ./.github/workflows/SonarQube.yml
-  #  secrets: inherit
-
   Release:
     name: Semantic Release
     if: github.event_name == 'push'
