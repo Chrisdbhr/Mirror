@@ -37,7 +37,6 @@ jobs:
   Release:
     name: Semantic Release
     if: github.event_name == 'push'
-    needs: RunUnityTests
     uses: ./.github/workflows/Semantic.yml
     secrets: inherit
 
